@@ -104,3 +104,63 @@ venv/
 
 # Local Wan / diffusers GPU environment
 .venv-wan/
+
+# ============================================================================
+# SPORSHO LAYER ADDITIONS (additive only — no upstream rule modified or removed)
+# ============================================================================
+# All patterns below are ROOT-ANCHORED (leading "/") on purpose. An unanchored
+# "clients/" would also match SPORSHO/CLIENTS/ on case-insensitive filesystems
+# (Windows/macOS), silently excluding the entire customisation layer.
+
+# Media guards. Upstream already ignores projects/, output/, pipeline/, corpus/,
+# but a stray `git add -A` from a media directory is the most expensive possible
+# mistake here: git history cannot be shrunk, so one committed render is permanent.
+/*.mp4
+/*.mov
+/*.mkv
+/*.avi
+/*.webm
+/*.m4v
+/*.wav
+/*.flac
+/*.aiff
+/*.psd
+/*.tif
+/*.tiff
+/*.raw
+/*.braw
+/*.r3d
+
+# Media at the root of SPORSHO/ only — the markdown knowledge files are NOT
+# ignored. Note: upstream-tracked demo clips under assets/ and .agents/skills/
+# stay tracked; .gitignore never untracks an already-tracked file.
+/SPORSHO/**/*.mp4
+/SPORSHO/**/*.mov
+/SPORSHO/**/*.wav
+/SPORSHO/**/*.psd
+
+# Media directories that must never be tracked (root-anchored)
+/clients/
+/footage/
+/renders/
+/exports/
+/deliverables/
+/local-media/
+/reference-videos/
+
+# Secrets — defence in depth beyond upstream's existing rules
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+/secrets/
+/credentials.json
+/token.json
+*.token
+
+# Sporsho local working state
+/SPORSHO/MEMORY/_scratch/
+/SPORSHO/**/_drafts/
+*.tmp
+*.bak
