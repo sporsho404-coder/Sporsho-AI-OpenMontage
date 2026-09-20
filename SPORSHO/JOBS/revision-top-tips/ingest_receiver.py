@@ -53,10 +53,18 @@ def manifest() -> dict:
 
 
 def expected_for(name: str) -> tuple[str | None, int | None]:
-    """Return (oid, size) this filename should match, if the manifest knows it."""
+    """Return (oid, size) this filename should match, if the manifest knows it.
+
+    Matching is case-insensitive on the stem+extension so `1.MP4` / `1.mov` still map to part
+    1, but deliberately NOT lenient about anything else: `01.mp4` or `part1.mp4` return no match
+    rather than being guessed into a slot, because a silently renumbered part is worse than a
+    refused upload.
+    """
     m = manifest()
+    lname = name.strip().lower()
     for key, part in (m.get("parts") or {}).items():
-        if name == f"{key}.mp4" or name.lower() == f"{key}.mov" or name == Path(part["repo_path"]).name:
+        aliases = {f"{key}.mp4", f"{key}.mov", f"{key}.m4v", Path(part["repo_path"]).name.lower()}
+        if lname in aliases:
             return part["lfs_oid_sha256"], part["expected_bytes"]
     return None, None
 
