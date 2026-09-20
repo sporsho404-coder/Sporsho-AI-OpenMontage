@@ -4,7 +4,7 @@ One line per reference. Add as you go — an unindexed reference is a forgotten 
 
 | Slug | Title | Creator | Why it matters | Patterns extracted | Date |
 |---|---|---|---|---|---|
-| _none yet_ | | | | | |
+| hutchain-3 | HUTCHAIN 3 | unknown (client-supplied) | The client's own definition of "premium" for `revision-top-tips` | **blocked — source bytes never reachable; see `hutchain-3/ANALYSIS.md`** | 2026-09-21 |
 
 ---
 
