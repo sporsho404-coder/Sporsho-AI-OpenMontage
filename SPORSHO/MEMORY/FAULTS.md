@@ -118,3 +118,28 @@ retrieved part: `sha256sum` must equal `lfs_oid_sha256` in `ingest-manifest.json
 **Upstream?**   no — environment + repo-policy interaction, but the *rule* belongs to
 Sporsho: media intake must never depend on LFS.
 **Seen again:**  2026-09-19, 2026-09-20, 2026-09-21 (×2, incl. post-public retry) → **promote to rule**
+
+**Post-public retry, exact evidence (2026-09-21):** repo confirmed genuinely public
+(`api.github.com` unauthenticated → `private=false`, HTML → 200). Unauthenticated
+`POST github.com/{owner}/{repo}.git/info/lfs/objects/batch` **works** and returns a valid
+presigned `download.href` on `github-cloud.githubusercontent.com/alambic/media/...`
+(`X-Amz-SignedHeaders=host`, `X-Amz-Expires=3600`). The next hop is where it dies: every
+GET/HEAD to that host returns `000` with curl exit **35 (SSL connect error)** in ~0.03 s —
+TLS is killed at SNI, so no HTTP request is ever sent. Visibility is irrelevant: the
+object store host, not auth, is the wall.
+**Do not re-test these (all proven dead, in both private and public state):**
+`raw.githubusercontent.com`, `media.`, `github-cloud.`, `objects.`,
+`results-receiver.`, `codeload` archive smudging (codeload is reachable and answers 200,
+but `tar.gz`/`zipball` **contain the 133-byte pointers** — GitHub never smudges LFS in
+archives), `github.com/.../raw/...` (302 → blocked host), `api.github.com/repos/.../media/`
+(404), `POST /repos/.../import` (404, no admin), third-party HTTP proxies
+(allorigins / codetabs / corsproxy), free file hosts (catbox, 0x0.st, tmpfiles, transfer.sh,
+litterbox, bashupload, ufile), Drive/Dropbox, jsDelivr, git-lfs (not installed). Reachable
+hosts in this sandbox: `github.com`, `api.github.com`, `codeload.github.com`, `pypi.org`,
+`files.pythonhosted.org`.
+**Correction to a plausible-sounding fix:** GitHub Importer does *not* convert LFS for you.
+Docs state: "If you use Git LFS, you will need to either convert the Git LFS objects to
+regular files tracked by Git **before** running the migration, or move the Git LFS objects
+to the new repository separately." So the local route is
+`git lfs migrate export --everything --include="*.mp4"` then push to a throwaway repo —
+that is a client-machine action, not an agent one.
