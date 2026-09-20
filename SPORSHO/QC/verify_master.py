@@ -10,7 +10,7 @@ drifted audio and non-monotonic PTS, so the only honest check is: count packets,
 frame, collect the set of decoded geometries, test PTS monotonicity and compare audio sample count
 against video frame count. Exit code 0 means all of that passed.
 """
-import sys, json, subprocess
+import sys, json, os
 import numpy as np, av
 
 path = sys.argv[1]
@@ -56,9 +56,10 @@ if a:
     ns, ar = a
     out.update(audio_packets=packets(1), audio_samples=ns, audio_rate=ar,
                audio_duration_s=round(ns / ar, 4), av_delta_s=round(ns / ar - vid, 5))
-meta = json.loads(subprocess.run(["ffprobe", "-v", "error", "-print_format", "json", "-show_format", path],
-                                capture_output=True, text=True).stdout)["format"]
-out["container"] = {"duration_s": float(meta["duration"]), "size_bytes": int(meta["size"])}
+c3 = av.open(path)
+out["container"] = {"duration_s": round(float(c3.duration / av.time_base), 4) if c3.duration else None,
+                    "size_bytes": os.path.getsize(path)}
+c3.close()
 if want is not None:
     out["frames_expected"] = want; out["frames_match"] = (n == want)
 print(json.dumps(out, indent=2))
