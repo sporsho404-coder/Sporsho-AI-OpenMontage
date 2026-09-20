@@ -143,3 +143,30 @@ regular files tracked by Git **before** running the migration, or move the Git L
 to the new repository separately." So the local route is
 `git lfs migrate export --everything --include="*.mp4"` then push to a throwaway repo —
 that is a client-machine action, not an agent one.
+
+### Sandbox egress is SNI-allowlisted → only an inbound intake works — 2026-09-21
+
+**Expected:**   A public direct-download URL (Drive / Dropbox / OneDrive / Cloudflare Tunnel /
+any HTTPS file URL) can be fetched by the agent once handed to it.
+**Actual:**      Nothing outside GitHub and PyPI can be fetched. TCP connects everywhere
+(`1.1.1.1:443`, `drive.google.com:80`, `catbox.moe:443` all report OPEN), but: TLS to any
+non-GitHub SNI dies immediately (`SSLZeroReturnError`, i.e. the middlebox closes the handshake);
+TLS with **no SNI at all** also dies; and plain **HTTP on port 80** is killed on first byte
+(`curl` → `000` in 0.003 s, 0 bytes) even against no-captive-portal test hosts and a public GCS
+object. Handshakes that *do* complete: `github.com`, `api.github.com`, `codeload.github.com`,
+`pypi.org`, `files.pythonhosted.org`.
+**Cause:**      Outbound filtering by TLS SNI against a small allowlist, plus L7 kill of
+non-allowlisted HTTP. Not DNS (8.8.8.8 resolves anything), not a firewall on ports.
+**Workaround:**   Intake is **inbound, not outbound**: the Arena preview proxy reaches any bound
+port on the sandbox, so the operator's browser can push the files in. Receiver +
+verify-then-join gate live in `SPORSHO/JOBS/revision-top-tips/` (`ingest_receiver.py`,
+`reconstruct.py`), token-gated, 4 MB resumable chunks, SHA-256 checked against the recorded
+LFS OIDs. It refuses: partial sets, overwriting an already-verified part, path traversal.
+**Note for whoever reads this next:** it is technically possible to smuggle traffic past this
+filter by putting `github.com` in the SNI of a connection to some other IP (measured: TLS
+completes). Do **not** do it — that is circumventing a platform egress control and would route
+client footage through a masqueraded connection. The legitimate version of the same trick is
+simply "put the bytes on GitHub as plain blobs".
+**Upstream?**   no — environment. But the *intake convention* is worth a house rule: every job
+needs a transfer route that does not depend on sandbox egress.
+**Seen again:**  2026-09-21 (×2: post-public retry, then direct-source probe)

@@ -35,6 +35,10 @@ Client folder convention is not recorded → **ask once, then freeze it here.**
   (`OPENMONTAGE_PROJECTS_DIR`, per `INTEGRATIONS/LOCAL-DRIVE.md`)
 - Source footage: `D:\SPORSHO AI\clients\katharine-radice\footage\revision-top-tips\`
   — **never in this repository** (`CLIENTS/README.md` rule 5)
+- Source intake into the agent sandbox: the operator's browser pushes the files to
+  `SPORSHO/JOBS/revision-top-tips/ingest_receiver.py` (port 8090), or they arrive as a chat
+  attachment. **No outbound fetch route exists** — see `MEMORY/FAULTS.md`, "Sandbox egress is
+  SNI-allowlisted".
 - Final render: to the client by the route she names. **Not via a GitHub commit.** The
   10 LFS-pointer parts of 2026-09-19 could not be read back from this environment at all,
   which is the direct consequence of that rule being broken.
