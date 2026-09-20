@@ -1,0 +1,72 @@
+{
+ "parts": [
+  {
+   "key": "1",
+   "path": "/home/user/k-radice-edit/ingest/1.mp4",
+   "sha256": "072ba3362aa42aeeef76279aa525cf2c8c957ecbcf263676620739146b66834c",
+   "bytes": 12531687
+  },
+  {
+   "key": "2",
+   "path": "/home/user/k-radice-edit/ingest/2.mp4",
+   "sha256": "4e8cd9081b7bcf5f1fe2597531fd33fc06770410aef5ad4ffd5decd18c71d270",
+   "bytes": 17010494
+  },
+  {
+   "key": "3",
+   "path": "/home/user/k-radice-edit/ingest/3.mp4",
+   "sha256": "afe1dd2eaf48d80a7ac419582f7976b81423564d0696cd575462d4f72af84a2c",
+   "bytes": 16145549
+  },
+  {
+   "key": "4",
+   "path": "/home/user/k-radice-edit/ingest/4.mp4",
+   "sha256": "35db4f353eb83f596425268312b3b0c5470b98a7a9fc067b948cb439883ae1f9",
+   "bytes": 22338629
+  },
+  {
+   "key": "5",
+   "path": "/home/user/k-radice-edit/ingest/5.mp4",
+   "sha256": "8ff51c83ebfb26571c6bff5348abe10144a0b5ddaa4440c61429b0a4b8a9db66",
+   "bytes": 20929766
+  },
+  {
+   "key": "6",
+   "path": "/home/user/k-radice-edit/ingest/6.mp4",
+   "sha256": "71e5ec70f4eb0b11a63cf36bf8105bab6fa753490b6f1629244be6fb6d348043",
+   "bytes": 21272945
+  },
+  {
+   "key": "7",
+   "path": "/home/user/k-radice-edit/ingest/7.mp4",
+   "sha256": "1c22b20df7e74ed3415f58eb4269bb2627fcd3b602921083f39a9f31bb9e4e93",
+   "bytes": 14195796
+  },
+  {
+   "key": "8",
+   "path": "/home/user/k-radice-edit/ingest/8.mp4",
+   "sha256": "768721ba0141bf375d80874b4c5846446902a2a380fa3f925174e9d6b39465c0",
+   "bytes": 18985241
+  },
+  {
+   "key": "9",
+   "path": "/home/user/k-radice-edit/ingest/9.mp4",
+   "sha256": "404ebfd96ccd3c8b1329e1c133f3cc76d1cf4dc070df3508145ea62ea7a44996",
+   "bytes": 21918852
+  },
+  {
+   "key": "10",
+   "path": "/home/user/k-radice-edit/ingest/10.mp4",
+   "sha256": "50652756e62fe89a481172793899ee18097d0958caf04adfefe13c55f536f6c7",
+   "bytes": 22658579
+  }
+ ],
+ "joined": "/home/user/k-radice-edit/work/revision-top-tips_full.mov",
+ "duration_seconds": 149.440204,
+ "sum_part_seconds": 149.41698300000002,
+ "width": 1080,
+ "height": 1920,
+ "fps": "22400/747",
+ "decode_errors": 0,
+ "verified_against_lfs_oid": true
+}

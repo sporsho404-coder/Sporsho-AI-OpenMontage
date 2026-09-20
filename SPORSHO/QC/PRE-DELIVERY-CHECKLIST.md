@@ -32,6 +32,10 @@ Run these automated checks — they cover things humans miss:
 - [ ] Duration within the agreed band
 - [ ] File naming matches the client's convention
 - [ ] Final render opens and plays end-to-end without corruption
+- [ ] Any source that was **joined from split footage** verified by decode, not by container:
+      `python3 SPORSHO/QC/verify_master.py MASTER --expect-frames N` must PASS (frame count,
+      uniform geometry, monotonic PTS, exact CFR spacing, zero A/V delta). A `-c copy` join can
+      report a clean duration while mixing frame sizes mid-stream and drifting audio by frames.
 
 ## Layer 3 — Sporsho Editorial
 

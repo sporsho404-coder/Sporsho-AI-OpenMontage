@@ -1,0 +1,10 @@
+{
+ "path": "master_norm.mov",
+ "frames": 4480,
+ "duration_s": 149.33333333333334,
+ "fps": 30.0,
+ "audio_s": 149.25786848072562,
+ "audio_rate": 44100,
+ "uniform_geometry": true,
+ "verified": "full decode of every frame and audio sample"
+}
