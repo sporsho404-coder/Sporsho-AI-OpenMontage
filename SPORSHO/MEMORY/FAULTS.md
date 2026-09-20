@@ -39,8 +39,6 @@ specific to your environment, your providers, and your configured API keys.
 
 ## Entries
 
-_None recorded yet._
-
 ---
 
 ## Categories To Watch
@@ -78,3 +76,45 @@ After a fault is seen **three times**, do one of:
 - **If it's genuinely upstream** → consider a pull request to
   `calesthio/OpenMontage`. **Never** patch upstream files directly in this repo —
   see `SPORSHO/INTEGRATIONS/GITHUB.md` for why.
+
+### GitHub-held client footage → unreachable from the agent sandbox — 2026-09-21 (re-verified after repo went public)
+
+**Expected:**   Footage committed to the repo is retrievable by the agent; making the
+repository **public** would let the LFS objects be downloaded directly.
+**Actual:**      `Revision top tips/1–10.mp4` are 133-byte pointers. Verified against the
+tarball of `main@26f2e3fd` (all ten oids + sizes recorded in
+`CLIENTS/katharine-radice/ingest-manifest.json`, total **187,987,538 B**). 0 of 10 parts
+readable. Public visibility changed nothing.
+**Cause:**       Three independent walls, any one of which is sufficient:
+1. LFS indirection — every *git-level* route returns the pointer:
+   `api.github.com/…/contents/{path}` → pointer; `…/git/blobs/{sha}` +
+   `Accept: application/vnd.github.raw` → pointer; `github.com/…/raw/main/…` → 302 to a
+   blocked host; **codeload tarball/zipball → pointers** (GitHub never smudges LFS in
+   archives); `POST /repos/…/git/blobs` style import → needs admin (404).
+2. The LFS object store host is filtered by **SNI**, not by auth: unauthenticated
+   `github.com/{repo}.git/info/lfs/objects/batch` *works* on a public repo and issues a
+   valid presigned href, but `github-cloud.githubusercontent.com`,
+   `media.githubusercontent.com`, `objects.githubusercontent.com`,
+   `results-receiver.actions.githubusercontent.com` all die at TLS
+   (`curl` → `000` in ~0.03 s, no handshake). Reachable hosts here: `github.com`,
+   `api.github.com`, `codeload.github.com`, `pypi.org`, `files.pythonhosted.org`.
+   Everything else tested (Drive, Dropbox, catbox, 0x0.st, transfer.sh, jsDelivr,
+   allorigins/codetabs/corsproxy, cloudflare tunnel) → `000`.
+3. No compute inside GitHub: the App token **cannot create or update
+   `.github/workflows/**` on any branch** (server-side policy; `git push` rejected,
+   `gh api` 422), so the one mechanism that could convert LFS→plain blobs inside
+   GitHub's own network is unavailable to the agent.
+**Control proof that the fault is LFS, not GitHub:** `assets/signal-from-tomorrow-demo.mp4`
+(20,897,137 B) is a *plain* blob and downloads fine through the identical
+`git/blobs/{sha}` endpoint. Every part is ≤22.7 MB — all under the 100 MB plain-blob
+ceiling, so **no LFS is required at all** for this footage.
+**Workaround:**   Do not route client footage through this repository (already
+`CLIENTS/README.md` rule 5 and `INTEGRATIONS/GITHUB.md` — "GitHub holds intelligence, not
+footage"; the LFS layer is what turns that mistake into a hard blocker). Two routes that
+work: (a) human pastes a relay workflow that republishes the parts as plain `.mov` blobs
+on an orphan branch — then `api.github.com` serves them to the agent; (b) attach the
+files in the chat/workspace, which bypasses sandbox egress entirely. Verify every
+retrieved part: `sha256sum` must equal `lfs_oid_sha256` in `ingest-manifest.json`.
+**Upstream?**   no — environment + repo-policy interaction, but the *rule* belongs to
+Sporsho: media intake must never depend on LFS.
+**Seen again:**  2026-09-19, 2026-09-20, 2026-09-21 (×2, incl. post-public retry) → **promote to rule**
