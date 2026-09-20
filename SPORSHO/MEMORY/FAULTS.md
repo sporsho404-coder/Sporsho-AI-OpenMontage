@@ -170,3 +170,33 @@ simply "put the bytes on GitHub as plain blobs".
 **Upstream?**   no — environment. But the *intake convention* is worth a house rule: every job
 needs a transfer route that does not depend on sandbox egress.
 **Seen again:**  2026-09-21 (×2: post-public retry, then direct-source probe)
+
+### A `-c copy` join of split footage is not timestamp-safe — 2026-09-21
+
+**Expected:**   Concatenating frame-exact chunks of one recording with `ffmpeg -f concat -safe 0 -c copy`
+produces a usable master, since every part decodes without error.
+**Actual:**      The copy-join of the ten Radice parts reported `149.440 s`, decoded with zero errors,
+and was still unusable: (1) it carried 1080×1920 for parts 1–9 and **720×1280** for part 10, so the
+MP4 changes coded frame size mid-stream at t≈128.1 s; (2) two **66.7 ms** gaps appeared at the joins
+after parts 3 and 7 — no frames were actually missing; (3) audio measured 149.6526 s against 149.4402 s
+of video → **+0.2196 s of A/V drift**, growing continuously, which reads on screen as narration and
+mouth movement disagreeing more toward the end; (4) re-timing that join with an `fps` filter produced
+4483 frames (three duplicates) instead of 4480.
+**Cause:**      The concat demuxer offsets each input by its *container duration*, and every part here
+overstated its frame count by 0.4–22.7 ms of AAC/priming padding, with each part's audio likewise
+longer than its video by the same amount. Timestamp arithmetic therefore drifts while the *picture
+data* stays perfect — which is exactly why a clean decode proves nothing about a join.
+**Workaround:**   Rebuild rather than copy: `scale`+`setsar`+`format` each part to an identical spec,
+`concat=n` the **filter** graph (not the demuxer) so frames are appended by count, then
+`setpts=N/(fps*TB)` across the whole output so every frame is numbered by index; separately decode
+each part's audio, trim it to exactly `frames/fps` seconds, concatenate, and mux with `-c copy` and
+**no** `-shortest`. Gate it with `SPORSHO/QC/verify_master.py FILE --expect-frames N`, which counts
+packets, decodes every frame, collects the set of decoded geometries, tests PTS monotonicity and
+spacing, and compares audio sample count with video frame count. Verified 2026-09-21: FAIL on the
+copy-join, PASS on the rebuilt master (4480/4480, uniform 1080×1920, A/V delta 0.00000 s).
+**Related trap (same file, same day):**   counting frames by grepping ffmpeg's stderr progress line
+returned `frame=0` for every part, and decoding on a PyAV handle that had already been demuxed
+returned zero frames — both look like corrupt media and are measurement bugs. Use `-count_frames`,
+or open a fresh container per pass.
+**Upstream?**   no — it is a general FFmpeg behaviour any editor will hit; the mitigation is now a
+house QC step (Layer 2 of `SPORSHO/QC/PRE-DELIVERY-CHECKLIST.md`).

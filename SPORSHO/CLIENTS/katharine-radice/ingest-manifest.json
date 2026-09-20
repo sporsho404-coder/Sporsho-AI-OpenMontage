@@ -1,123 +1,134 @@
 {
- "version": "1.0",
- "project_id": "radice-revision-top-tips",
- "generated_utc": "2026-09-21",
- "source_of_truth": "pointer files read out of the codeload tarball of main@26f2e3fd (not transcribed from chat)",
- "order": [
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10"
- ],
- "total_expected_bytes": 187987538,
- "note": "Retrieval verification manifest. sha256sum of each downloaded part MUST equal lfs_oid_sha256 before reconstruction. Join strictly in `order`. If any part is missing, do not reconstruct.",
- "retrieval_status": "0/10 \u2014 parts 1-10 are LFS pointers; media object host is unreachable from the edit sandbox (see SPORSHO/MEMORY/FAULTS.md)",
- "parts": {
-  "1": {
-   "repo_path": "Revision top tips/1.mp4",
-   "lfs_oid_sha256": "072ba3362aa42aeeef76279aa525cf2c8c957ecbcf263676620739146b66834c",
-   "expected_bytes": 12531687,
-   "pointer_bytes": 133,
-   "pointer_sha256": "b1e3eddb444ebcf103b15feacf7c0b13d8401fd9b8c96152d4ff8bf01e22b264",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
+  "version": "1.0",
+  "project_id": "radice-revision-top-tips",
+  "generated_utc": "2026-09-21",
+  "source_of_truth": "pointer files read out of the codeload tarball of main@26f2e3fd (not transcribed from chat)",
+  "order": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+  ],
+  "total_expected_bytes": 187987538,
+  "note": "Retrieval verification manifest. sha256sum of each downloaded part MUST equal lfs_oid_sha256 before reconstruction. Join strictly in `order`. If any part is missing, do not reconstruct.",
+  "retrieval_status": "10/10 VERIFIED RETRIEVED \u2014 2026-09-21 via inbound browser upload (/home/user/k-radice-edit/ingest/1.mp4\u202610.mp4); every part's sha256 equals its lfs_oid_sha256 (recomputed independently with sha256sum and hashlib); on-disk total 187,987,538 B == total_expected_bytes exactly. Reconstruction verified by decode: see SOURCE-VERIFICATION.md and verification/.",
+  "parts": {
+    "1": {
+      "repo_path": "Revision top tips/1.mp4",
+      "lfs_oid_sha256": "072ba3362aa42aeeef76279aa525cf2c8c957ecbcf263676620739146b66834c",
+      "expected_bytes": 12531687,
+      "pointer_bytes": 133,
+      "pointer_sha256": "b1e3eddb444ebcf103b15feacf7c0b13d8401fd9b8c96152d4ff8bf01e22b264",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "2": {
+      "repo_path": "Revision top tips/2.mp4",
+      "lfs_oid_sha256": "4e8cd9081b7bcf5f1fe2597531fd33fc06770410aef5ad4ffd5decd18c71d270",
+      "expected_bytes": 17010494,
+      "pointer_bytes": 133,
+      "pointer_sha256": "b3c1f8f22f59405940e833a377058410d9afa9011414e8f5291e228b0f7fe8ee",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "3": {
+      "repo_path": "Revision top tips/3.mp4",
+      "lfs_oid_sha256": "afe1dd2eaf48d80a7ac419582f7976b81423564d0696cd575462d4f72af84a2c",
+      "expected_bytes": 16145549,
+      "pointer_bytes": 133,
+      "pointer_sha256": "e9de49414ec11c003ff07849c0ad22e06e3823a941f6772eeef2f5c6c2e55500",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "4": {
+      "repo_path": "Revision top tips/4.mp4",
+      "lfs_oid_sha256": "35db4f353eb83f596425268312b3b0c5470b98a7a9fc067b948cb439883ae1f9",
+      "expected_bytes": 22338629,
+      "pointer_bytes": 133,
+      "pointer_sha256": "f79bd8f22c7a26e8665b471a6c3f1f252edc430f27b8db02d2a06ad3da799bc5",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "5": {
+      "repo_path": "Revision top tips/5.mp4",
+      "lfs_oid_sha256": "8ff51c83ebfb26571c6bff5348abe10144a0b5ddaa4440c61429b0a4b8a9db66",
+      "expected_bytes": 20929766,
+      "pointer_bytes": 133,
+      "pointer_sha256": "0d5ea6ac2c18db80257657417fbcc3e959a02e0c55fd7d6597b7adc97a1d9410",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "6": {
+      "repo_path": "Revision top tips/6.mp4",
+      "lfs_oid_sha256": "71e5ec70f4eb0b11a63cf36bf8105bab6fa753490b6f1629244be6fb6d348043",
+      "expected_bytes": 21272945,
+      "pointer_bytes": 133,
+      "pointer_sha256": "e550848784284cda63b576a51e2453062ef6e73be638de7a9be1a8f5942b5283",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "7": {
+      "repo_path": "Revision top tips/7.mp4",
+      "lfs_oid_sha256": "1c22b20df7e74ed3415f58eb4269bb2627fcd3b602921083f39a9f31bb9e4e93",
+      "expected_bytes": 14195796,
+      "pointer_bytes": 133,
+      "pointer_sha256": "1e7cb668af0ec756bbbc30ff6f9b403270f12346201b71d4c1e27cfbf687f2aa",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "8": {
+      "repo_path": "Revision top tips/8.mp4",
+      "lfs_oid_sha256": "768721ba0141bf375d80874b4c5846446902a2a380fa3f925174e9d6b39465c0",
+      "expected_bytes": 18985241,
+      "pointer_bytes": 133,
+      "pointer_sha256": "57515d463ac5eae6a5b0399317df67757a120b341bc4ff07ea9fe90b41ab14af",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "9": {
+      "repo_path": "Revision top tips/9.mp4",
+      "lfs_oid_sha256": "404ebfd96ccd3c8b1329e1c133f3cc76d1cf4dc070df3508145ea62ea7a44996",
+      "expected_bytes": 21918852,
+      "pointer_bytes": 133,
+      "pointer_sha256": "48fc52c930a9d2d7d4de035bfe06029f725c27765cae6e9e70366f148555990e",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    },
+    "10": {
+      "repo_path": "Revision top tips/10.mp4",
+      "lfs_oid_sha256": "50652756e62fe89a481172793899ee18097d0958caf04adfefe13c55f536f6c7",
+      "expected_bytes": 22658579,
+      "pointer_bytes": 133,
+      "pointer_sha256": "993ed475daf861edf581095dd80fe3d6a2829298cb0ac7a14be9f517d68df622",
+      "retrieved": false,
+      "retrieved_sha256": null,
+      "verified": false
+    }
   },
-  "2": {
-   "repo_path": "Revision top tips/2.mp4",
-   "lfs_oid_sha256": "4e8cd9081b7bcf5f1fe2597531fd33fc06770410aef5ad4ffd5decd18c71d270",
-   "expected_bytes": 17010494,
-   "pointer_bytes": 133,
-   "pointer_sha256": "b3c1f8f22f59405940e833a377058410d9afa9011414e8f5291e228b0f7fe8ee",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "3": {
-   "repo_path": "Revision top tips/3.mp4",
-   "lfs_oid_sha256": "afe1dd2eaf48d80a7ac419582f7976b81423564d0696cd575462d4f72af84a2c",
-   "expected_bytes": 16145549,
-   "pointer_bytes": 133,
-   "pointer_sha256": "e9de49414ec11c003ff07849c0ad22e06e3823a941f6772eeef2f5c6c2e55500",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "4": {
-   "repo_path": "Revision top tips/4.mp4",
-   "lfs_oid_sha256": "35db4f353eb83f596425268312b3b0c5470b98a7a9fc067b948cb439883ae1f9",
-   "expected_bytes": 22338629,
-   "pointer_bytes": 133,
-   "pointer_sha256": "f79bd8f22c7a26e8665b471a6c3f1f252edc430f27b8db02d2a06ad3da799bc5",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "5": {
-   "repo_path": "Revision top tips/5.mp4",
-   "lfs_oid_sha256": "8ff51c83ebfb26571c6bff5348abe10144a0b5ddaa4440c61429b0a4b8a9db66",
-   "expected_bytes": 20929766,
-   "pointer_bytes": 133,
-   "pointer_sha256": "0d5ea6ac2c18db80257657417fbcc3e959a02e0c55fd7d6597b7adc97a1d9410",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "6": {
-   "repo_path": "Revision top tips/6.mp4",
-   "lfs_oid_sha256": "71e5ec70f4eb0b11a63cf36bf8105bab6fa753490b6f1629244be6fb6d348043",
-   "expected_bytes": 21272945,
-   "pointer_bytes": 133,
-   "pointer_sha256": "e550848784284cda63b576a51e2453062ef6e73be638de7a9be1a8f5942b5283",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "7": {
-   "repo_path": "Revision top tips/7.mp4",
-   "lfs_oid_sha256": "1c22b20df7e74ed3415f58eb4269bb2627fcd3b602921083f39a9f31bb9e4e93",
-   "expected_bytes": 14195796,
-   "pointer_bytes": 133,
-   "pointer_sha256": "1e7cb668af0ec756bbbc30ff6f9b403270f12346201b71d4c1e27cfbf687f2aa",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "8": {
-   "repo_path": "Revision top tips/8.mp4",
-   "lfs_oid_sha256": "768721ba0141bf375d80874b4c5846446902a2a380fa3f925174e9d6b39465c0",
-   "expected_bytes": 18985241,
-   "pointer_bytes": 133,
-   "pointer_sha256": "57515d463ac5eae6a5b0399317df67757a120b341bc4ff07ea9fe90b41ab14af",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "9": {
-   "repo_path": "Revision top tips/9.mp4",
-   "lfs_oid_sha256": "404ebfd96ccd3c8b1329e1c133f3cc76d1cf4dc070df3508145ea62ea7a44996",
-   "expected_bytes": 21918852,
-   "pointer_bytes": 133,
-   "pointer_sha256": "48fc52c930a9d2d7d4de035bfe06029f725c27765cae6e9e70366f148555990e",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
-  },
-  "10": {
-   "repo_path": "Revision top tips/10.mp4",
-   "lfs_oid_sha256": "50652756e62fe89a481172793899ee18097d0958caf04adfefe13c55f536f6c7",
-   "expected_bytes": 22658579,
-   "pointer_bytes": 133,
-   "pointer_sha256": "993ed475daf861edf581095dd80fe3d6a2829298cb0ac7a14be9f517d68df622",
-   "retrieved": false,
-   "retrieved_sha256": null,
-   "verified": false
+  "retrieved_utc": "2026-09-21",
+  "master": {
+    "path": "/home/user/k-radice-edit/work/master_norm.mov",
+    "frames": 4480,
+    "duration_s": 149.3333,
+    "size": "1080x1920 uniform",
+    "fps": 30.0,
+    "audio": "pcm_s24le 44100Hz stereo, 6585600 samples, A/V delta 0.00000 s",
+    "how": "frame-indexed rebuild (not a -c copy join) \u2014 see SOURCE-VERIFICATION.md \u00a73",
+    "verify": "SPORSHO/QC/verify_master.py \u2014 PASS"
   }
- }
 }
