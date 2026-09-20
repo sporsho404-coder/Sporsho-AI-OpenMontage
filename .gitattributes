@@ -4,7 +4,6 @@
 # This keeps Windows, macOS, and Linux checkouts byte-consistent and prevents
 # CRLF drift from producing noisy whole-file diffs.
 * text=auto eol=lf
-
 # --- Source code -----------------------------------------------------------
 *.py    text eol=lf
 *.ts    text eol=lf
@@ -21,17 +20,14 @@
 *.txt   text eol=lf
 *.cfg   text eol=lf
 *.ini   text eol=lf
-
 # --- Newline-sensitive files (must stay LF) --------------------------------
 # A shell script checked out with CRLF has a broken shebang and will not run.
 *.sh        text eol=lf
 Makefile    text eol=lf
 .env.example text eol=lf
-
 # Windows batch files, if ever added, must keep CRLF.
 *.bat   text eol=crlf
 *.cmd   text eol=crlf
-
 # --- Binary assets (never normalize or diff) -------------------------------
 *.png   binary
 *.jpg   binary
@@ -39,7 +35,7 @@ Makefile    text eol=lf
 *.gif   binary
 *.webp  binary
 *.ico   binary
-*.mp4   binary
+*.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mov   binary
 *.webm  binary
 *.mp3   binary
@@ -49,3 +45,4 @@ Makefile    text eol=lf
 *.ttf   binary
 *.otf   binary
 *.pdf   binary
+*.MOV filter=lfs diff=lfs merge=lfs -text
